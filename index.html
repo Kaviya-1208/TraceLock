@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>TraceLock</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 500px;
+            margin: 80px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #111;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #333;
+        }
+
+        .info {
+            margin-top: 20px;
+            padding: 12px;
+            background: #eee;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <h1>🔐 TraceLock</h1>
+
+        <p class="subtitle">
+            Ephemeral Cloud Document Framework
+        </p>
+
+
+        <h2>Upload Document</h2>
+
+
+        <form
+            action="/upload"
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+            <!-- PDF Upload -->
+
+            <label>
+                Select PDF Document
+            </label>
+
+            <input
+                type="file"
+                name="document"
+                accept=".pdf"
+                required
+            >
+
+
+            <!-- Recipient Email -->
+
+            <label>
+                Recipient Email
+            </label>
+
+            <input
+                type="email"
+                name="recipient_email"
+                placeholder="recipient@example.com"
+                required
+            >
+
+
+            <!-- Expiry -->
+
+            <label>
+                Expiry Time
+            </label>
+
+            <select
+                name="expiry"
+                required
+            >
+
+                <option value="1">
+                    1 Minute
+                </option>
+
+                <option value="5">
+                    5 Minutes
+                </option>
+
+                <option value="10">
+                    10 Minutes
+                </option>
+
+                <option value="30">
+                    30 Minutes
+                </option>
+
+            </select>
+
+
+            <!-- Upload -->
+
+            <button type="submit">
+                Upload PDF
+            </button>
+
+        </form>
+
+
+        <div class="info">
+
+            🔒 Document access will automatically expire
+            after the selected time.
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

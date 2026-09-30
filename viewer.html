@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>TraceLock - Secure Viewer</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #222;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            height: 55px;
+            background: #111;
+            color: white;
+
+            display: flex;
+            align-items: center;
+
+            padding-left: 20px;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+
+        /* PDF Viewer */
+        .viewer {
+            position: relative;
+
+            width: 100%;
+            height: calc(100vh - 55px);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+
+            border: none;
+        }
+
+
+        /* Forensic Watermark */
+        .watermark {
+
+            position: absolute;
+
+            top: 45%;
+            left: 50%;
+
+            transform:
+                translate(-50%, -50%)
+                rotate(-25deg);
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+            color: rgba(255, 0, 0, 0.25);
+
+            pointer-events: none;
+
+            z-index: 10;
+
+            text-align: center;
+
+            white-space: nowrap;
+
+            line-height: 1.6;
+        }
+
+
+        .watermark .small {
+            font-size: 18px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Header -->
+
+    <div class="header">
+
+        <div class="title">
+            🔐 TraceLock — Secure Document Viewer
+        </div>
+
+    </div>
+
+
+
+    <!-- PDF Viewer -->
+
+    <div class="viewer">
+
+
+        <!-- PDF -->
+
+        <iframe
+            src="/document/{{ token }}">
+        </iframe>
+
+
+
+        <!-- Forensic Watermark -->
+
+        <div class="watermark">
+
+            <div>
+                TraceLock
+            </div>
+
+            <div>
+                CONFIDENTIAL
+            </div>
+
+            <div class="small">
+                Recipient: {{ recipient_email }}
+            </div>
+
+            <div class="small">
+                Viewed: <span id="viewTime"></span>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- Security Controls -->
+
+    <script>
+
+
+        // =========================
+        // VIEW TIME
+        // =========================
+
+        const now = new Date();
+
+        document.getElementById("viewTime").textContent =
+            now.toLocaleString();
+
+
+
+        // =========================
+        // DISABLE RIGHT CLICK
+        // =========================
+
+        document.addEventListener(
+            "contextmenu",
+            function(event) {
+
+                event.preventDefault();
+
+            }
+        );
+
+
+
+        // =========================
+        // DISABLE COPY / PRINT / SAVE
+        // =========================
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                const key =
+                    event.key.toLowerCase();
+
+
+                // Ctrl + C
+                if (event.ctrlKey && key === "c") {
+
+                    event.preventDefault();
+
+                }
+
+
+                // Ctrl + P
+                if (event.ctrlKey && key === "p") {
+
+                    event.preventDefault();
+
+                }
+
+
+                // Ctrl + S
+                if (event.ctrlKey && key === "s") {
+
+                    event.preventDefault();
+
+                }
+
+
+                // Ctrl + U
+                if (event.ctrlKey && key === "u") {
+
+                    event.preventDefault();
+
+                }
+
+            }
+        );
+
+
+
+        // =========================
+        // DISABLE TEXT SELECTION
+        // =========================
+
+        document.addEventListener(
+            "selectstart",
+            function(event) {
+
+                event.preventDefault();
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>
